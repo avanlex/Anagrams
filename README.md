@@ -1,6 +1,5 @@
 # Task 1. Anagrams
 
-
 ## Application
 Create an application that rotates a string according to a user-defined algorithm.
 
@@ -9,7 +8,6 @@ Create an application that rotates a string according to a user-defined algorith
 + String should be typed by the user.
 + Program should reverse all words of input text and show result on the screen.
 + Make set of characters that will be ignored in rotation, allow users to extend that set.
-
 
 ## Technology stack
 + Language - Java
