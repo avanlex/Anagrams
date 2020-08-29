@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Anagrams</string>
+    <string name="text_to_reverse">Text to reverse</string>
+    <string name="fixed_chars">Fixed chars</string>
+    <string name="reversed_text">Reversed text</string>
+    <string name="reverse">Reverse</string>
+    <string name="cross">✖</string>
+</resources>
