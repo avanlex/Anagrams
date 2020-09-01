@@ -4,25 +4,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import androidx.appcompat.app.AppCompatActivity;
-import com.google.android.material.textfield.TextInputLayout;
 
-/*
-Button   - btn
-Checkbox - chk
-EditText - et
-GalleryView  - gv
-LinearLayout - ll
-ListView - lv
-Menu     - mnu
-ProgressBar    - pb
-RadioButton    - rb
-RelativeLayout - rl
-Spinner  - spn
-TextInputLayout - til
-TextView - tv
-ToggleButton - tb
- */
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.textfield.TextInputLayout;
 
 public class MainActivity extends AppCompatActivity implements MainContract.View {
 
@@ -44,13 +29,13 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         setContentView(R.layout.activity_main);
 
         //Instantiate Presenter and pass View by argument this - that Activity extends MainContract.View
-       Presenter = new MainPresenter(this);
-       tilDictionary = (TextInputLayout) findViewById(R.id.editTextDictionary);
-       tilStringToReverse = (TextInputLayout) findViewById(R.id.editTextStringToReverse);
-       tilReversedString = (TextInputLayout) findViewById(R.id.editTextReversedString);
-       btReverse = (Button) findViewById(R.id.buttonReverse);
+        Presenter = new MainPresenter(this);
+        tilDictionary = findViewById(R.id.editTextDictionary);
+        tilStringToReverse = findViewById(R.id.editTextStringToReverse);
+        tilReversedString = findViewById(R.id.editTextReversedString);
+        btReverse = findViewById(R.id.buttonReverse);
 
-       btReverse.setOnClickListener(new View.OnClickListener() {
+        btReverse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Presenter.onButtonWasClicked();
