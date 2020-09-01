@@ -1,109 +1,90 @@
 package com.github.avanlex;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.android.material.textfield.TextInputLayout;
-
-
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.material.textfield.TextInputLayout;
 
-import java.util.HashSet;
-import java.util.Objects;
+/*
+Button   - btn
+Checkbox - chk
+EditText - et
+GalleryView  - gv
+LinearLayout - ll
+ListView - lv
+Menu     - mnu
+ProgressBar    - pb
+RadioButton    - rb
+RelativeLayout - rl
+Spinner  - spn
+TextInputLayout - til
+TextView - tv
+ToggleButton - tb
+ */
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MainContract.View {
 
-    private Button buttonReverse;
-    private TextInputLayout mEditTextFixedChars;
-    private TextInputLayout mEditTextStringToReverse;
-    private TextInputLayout mEditTextReversedString;
+    private static final String TAG = "MainActivity";
+    private MainContract.Presenter Presenter;
+    private Button btReverse;
 
-    static HashSet<Character> dictionary = new HashSet<Character>();
+    //private Button buttonReverse;
+    private TextInputLayout tilDictionary;
+    private TextInputLayout tilStringToReverse;
+    private TextInputLayout tilReversedString;
 
-    public String inputStringToReverse() {
-        return Objects.requireNonNull(mEditTextStringToReverse.getEditText()).getText().toString();
-    }
-    public void outputReversedString(String line) {
-         Objects.requireNonNull(mEditTextReversedString.getEditText()).setText(line);
-    }
-
-    /**
-     * @param s - string of chars which will be added to set
-     */
-    private static void setDictionary(String s) {
-        dictionary.clear();
-        for (Character c : s.toCharArray()) {
-            dictionary.add(c);
-        }
-    }
-
-    public void setupDictionary() {
-        String line = Objects.requireNonNull(mEditTextFixedChars.getEditText()).getText().toString();
-        // reading line and remove whitespaces
-        line = line.replaceAll("\\s", "");
-        setDictionary(line);
-    }
-
-    /**
-     * getter for dict
-     */
-    private static HashSet<Character> getDictionary() {
-        return dictionary;
-    }
-
-    private boolean isExcluded(char c) {
-        return getDictionary().contains(c);
-    }
-
-    private String reverseWords(String in) {
-        char[] chars = in.toCharArray();
-        for (int i = 0, len = chars.length; i < len; i++) {
-            if (chars[i] != ' ') {
-                int end = i;
-                //noinspection StatementWithEmptyBody
-                while (++end < len && chars[end] != ' ') {}
-                int j = end - 1;
-                while (j > i) {
-                    // Ignore excluded characters from the left
-                    if (isExcluded(chars[i]))
-                        i++;
-                        // Ignore excluded characters from the right
-                    else if (isExcluded(chars[j]))
-                        j--;
-                    else {
-                        char temp = chars[i];
-                        chars[i++] = chars[j];
-                        chars[j--] = temp;
-                    }
-                }
-                i = end;
-            }
-        }
-        return String.valueOf(chars);
-    }
+    private String stringReversing = "";
+    private String stringDictionary = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        buttonReverse            = (Button)          findViewById(R.id.buttonReverse);
-        mEditTextFixedChars      = (TextInputLayout) findViewById(R.id.editTextFixedChars);
-        mEditTextReversedString  = (TextInputLayout) findViewById(R.id.editTextReversedString);
-        mEditTextStringToReverse = (TextInputLayout) findViewById(R.id.editTextStringToReverse);
+        //Instantiate Presenter and pass View by argument this - that Activity extends MainContract.View
+       Presenter = new MainPresenter(this);
+       tilDictionary = (TextInputLayout) findViewById(R.id.editTextDictionary);
+       tilStringToReverse = (TextInputLayout) findViewById(R.id.editTextStringToReverse);
+       tilReversedString = (TextInputLayout) findViewById(R.id.editTextReversedString);
+       btReverse = (Button) findViewById(R.id.buttonReverse);
 
-        buttonReverse.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        String line = inputStringToReverse();
-                        setupDictionary();
-                        String result = reverseWords(line);
-                        outputReversedString(result);
-                    }
-                });
+       btReverse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Presenter.onButtonWasClicked();
+            }
+        });
+        Log.d(TAG, "onCreate()");
     }
 
+    @Override
+    public void showResponse(String response) {
+        tilReversedString.getEditText().setText(response);
+        Log.d(TAG, "showResponse()");
+    }
 
+    @Override
+    public String getDictionary() {
+        String res = tilDictionary.getEditText().getText().toString();
+        Log.d(TAG, "getDictionary()");
+        return res;
+    }
+
+    @Override
+    public String getStringToReverse() {
+        String res = tilStringToReverse.getEditText().getText().toString();
+        Log.d(TAG, "getStringToReverse()");
+        return res;
+    }
+
+    //Calling Presenter onDestroy method, to avoid context leak and other bad things.
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Presenter.onDestroy();
+        Log.d(TAG, "onDestroy()");
+    }
 }
+

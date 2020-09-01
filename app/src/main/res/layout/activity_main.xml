@@ -25,7 +25,7 @@
 
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/editTextFixedChars"
+            android:id="@+id/editTextDictionary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
