@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="side_margine">24dp</dimen>
+    <dimen name="vertical_margin">20dp</dimen>
+    <dimen name="screen_egde_margin">24dp</dimen>
+</resources>

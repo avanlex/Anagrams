@@ -1,91 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:orientation="vertical"
+    android:gravity="center_vertical">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="24dp"
-        android:gravity="center_vertical"
-        android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintVertical_bias="0.0">
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editTextDictionary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/side_margine"
+        android:layout_marginEnd="@dimen/side_margine"
+        android:layout_marginBottom="@dimen/vertical_margin"
+        app:endIconMode="clear_text"
+        app:errorEnabled="false">
 
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/editTextDictionary"
+        <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            app:counterEnabled="false"
-            app:counterMaxLength="30"
-            app:endIconMode="clear_text"
-            app:errorEnabled="false">
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/fixed_chars"
-                android:inputType="text" />
-        </com.google.android.material.textfield.TextInputLayout>
+            android:hint="@string/fixed_chars"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/editTextStringToReverse"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editTextStringToReverse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/side_margine"
+        android:layout_marginEnd="@dimen/side_margine"
+        app:endIconMode="clear_text"
+        app:errorEnabled="false">
+
+        <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:counterEnabled="false"
-            app:counterMaxLength="30"
-            app:endIconMode="clear_text"
-            app:errorEnabled="false">
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/text_to_reverse"
-                android:inputType="text" />
-        </com.google.android.material.textfield.TextInputLayout>
+            android:hint="@string/text_to_reverse"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/editTextReversedString"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editTextReversedString"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/side_margine"
+        android:layout_marginEnd="@dimen/side_margine"
+        app:endIconMode="clear_text"
+        app:errorEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:endIconMode="clear_text"
-            app:errorEnabled="true">
+            android:hint="@string/reversed_text"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/reversed_text"
-                android:inputType="text" />
-        </com.google.android.material.textfield.TextInputLayout>
+    <Button
+        android:id="@+id/buttonReverse"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/side_margine"
+        android:layout_marginEnd="@dimen/side_margine"
+        android:background="@color/colorPrimaryDark"
+        android:text="@string/reverse" />
 
-        <Button
-            android:id="@+id/buttonReverse"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="20dp"
-            android:background="@color/colorPrimaryDark"
-            android:text="@string/reverse" />
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/side_margine"
+        android:layout_marginTop="@dimen/vertical_margin"
+        android:layout_marginEnd="@dimen/side_margine"
+        android:contentDescription="@string/logo_description"
+        app:srcCompat="@drawable/ic_avanlex" />
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_avanlex" />
 
-    </LinearLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
