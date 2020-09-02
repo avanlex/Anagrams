@@ -9,7 +9,7 @@ public class MainModel implements MainContract.Model, Reversable {
     private static final String TAG = "MainModel";
 
     private HashSet<Character> makeDictionary(String s) {
-        HashSet<Character> charSet = new HashSet<Character>();
+        HashSet<Character> charSet = new HashSet<>();
         for (Character c : s.toCharArray()) {
             charSet.add(c);
         }
@@ -25,9 +25,11 @@ public class MainModel implements MainContract.Model, Reversable {
         for (int headIndex = 0, len = chars.length; headIndex < len; headIndex++) {
             if (chars[headIndex] != ' ') {
                 int wordEndIndex = headIndex; // zero length word
+
                 //noinspection StatementWithEmptyBody
                 while (++wordEndIndex < len && chars[wordEndIndex] != ' ') {} // scan word until [space] symbol
                 int tailIndex = wordEndIndex - 1; // set index of char before space symbol
+
                 while (tailIndex > headIndex) {
                     // Ignore excluded characters from the left
                     if (exclusionDictionary.contains(chars[headIndex]))
@@ -41,6 +43,7 @@ public class MainModel implements MainContract.Model, Reversable {
                         chars[tailIndex--] = temp;
                     }
                 }
+
                 headIndex = wordEndIndex;
             }
         }

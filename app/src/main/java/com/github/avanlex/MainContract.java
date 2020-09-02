@@ -8,7 +8,7 @@ public interface MainContract {
     }
 
     interface Presenter {
-        void onButtonWasClicked();
+        void onBtReverseClick();
         void onDestroy();
     }
 

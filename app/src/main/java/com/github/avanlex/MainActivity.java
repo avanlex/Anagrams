@@ -12,36 +12,40 @@ import com.google.android.material.textfield.TextInputLayout;
 public class MainActivity extends AppCompatActivity implements MainContract.View {
 
     private static final String TAG = "MainActivity";
-    private MainContract.Presenter Presenter;
-    private Button btReverse;
+    private MainContract.Presenter presenter;
 
-    //private Button buttonReverse;
+    // UI controls
+    private Button btnReverse;
     private TextInputLayout tilDictionary;
     private TextInputLayout tilStringToReverse;
     private TextInputLayout tilReversedString;
 
-    private String stringReversing = "";
-    private String stringDictionary = "";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        initUI();
+        setupUI();
+        Log.d(TAG, "onCreate()");
+    }
 
-        //Instantiate Presenter and pass View by argument this - that Activity extends MainContract.View
-        Presenter = new MainPresenter(this);
+    private void initUI(){
+        setContentView(R.layout.activity_main);
         tilDictionary = findViewById(R.id.editTextDictionary);
         tilStringToReverse = findViewById(R.id.editTextStringToReverse);
         tilReversedString = findViewById(R.id.editTextReversedString);
-        btReverse = findViewById(R.id.buttonReverse);
+        btnReverse = findViewById(R.id.buttonReverse);
 
-        btReverse.setOnClickListener(new View.OnClickListener() {
+        // Instantiate Presenter and pass View by argument this - that Activity extends MainContract.View
+        presenter = new MainPresenter(this);
+    }
+
+    private void setupUI(){
+        btnReverse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Presenter.onButtonWasClicked();
+                presenter.onBtReverseClick();
             }
         });
-        Log.d(TAG, "onCreate()");
     }
 
     @Override
@@ -64,11 +68,11 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         return res;
     }
 
-    //Calling Presenter onDestroy method, to avoid context leak and other bad things.
+    // Calling Presenter onDestroy method, to avoid context leak and other bad things.
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Presenter.onDestroy();
+        presenter.onDestroy();
         Log.d(TAG, "onDestroy()");
     }
 }
