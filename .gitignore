@@ -3,6 +3,8 @@
 
 # Built application files
 /build
+/app/debug
+/app/release
 
 # Crashlytics configuations
 com_crashlytics_export_strings.xml
@@ -44,3 +46,4 @@ local.properties
 .Trashes
 ehthumbs.db
 Thumbs.db
+
