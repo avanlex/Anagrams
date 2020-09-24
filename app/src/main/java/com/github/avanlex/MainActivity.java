@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
 
-//public class MainActivity extends Fragment implements MainContract.View {
+
 public class MainActivity extends AppCompatActivity implements MainContract.View {
 
     private static final String TAG = "MainActivity";
